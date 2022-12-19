@@ -14,6 +14,7 @@
 const geocode = require('./utils/geocode');
 
 console.log('starting');
+//Call back abstraction is taking out new code into the new reusable file
 geocode('Boston', (error, data) => {
   console.log('Error', error);
   console.log('data', data);
