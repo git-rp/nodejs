@@ -12,10 +12,23 @@
 // });
 
 const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
 
 console.log('starting');
 //Call back abstraction is taking out new code into the new reusable file
-geocode('Boston', (error, data) => {
+// geocode('Boston', (error, data) => {
+//   console.log('Error', error);
+//   console.log('data', data);
+// });
+
+forecast(10.7128, -94.006, (error, data) => {
   console.log('Error', error);
-  console.log('data', data);
+  console.log(
+    'forcast for tomorrow is : conditions :' +
+      data.conditions +
+      ' Max temp : ' +
+      data.tempmax +
+      ' Min temp : ' +
+      data.tempmin
+  );
 });
