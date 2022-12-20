@@ -43,6 +43,17 @@ app.get('/help', (req, res) => {
     name: 'Bhuvi',
   });
 });
+app.get('/products', (req, res) => {
+  if (!req.query.search) {
+    return res.send({
+      error: 'Must provide search term',
+    });
+  }
+  console.log(req.query.search);
+  res.send({
+    products: [],
+  });
+});
 //app.use(express.static(publicDir));
 // app.get('', (req, res) => {
 //   res.render('index');
@@ -69,7 +80,13 @@ app.get('/help', (req, res) => {
 //   res.send('<h1>about page</h1>');
 // });
 app.get('/weather', (req, res) => {
-  res.send({ forcase: 'cloudy', location: 'pune' });
+  if (!req.query.address) {
+    return res.send({
+      error: 'Please provide the address',
+    });
+  }
+  const address = req.query.address;
+  res.send({ forcase: 'cloudy', location: address });
 });
 app.get('/help/*', (req, res) => {
   res.render('404', {
@@ -81,6 +98,7 @@ app.get('*', (req, res) => {
     msg: 'Page not found....',
   });
 });
+
 //Start server on port 3000 for listing request
 app.listen(3000, () => {
   console.log('server is up on port 3000');
