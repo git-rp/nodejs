@@ -1,5 +1,8 @@
 const path = require('path');
+const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
 const express = require('express');
+
 const hbs = require('hbs');
 const { allowedNodeEnvironmentFlags } = require('process');
 console.log(__dirname);
@@ -86,7 +89,34 @@ app.get('/weather', (req, res) => {
     });
   }
   const address = req.query.address;
-  res.send({ forcase: 'cloudy', location: address });
+  geocode(address, (error, data) => {
+    if (error) {
+      return res.send({ error });
+    }
+    console.log('data', data);
+
+    const { latitude, longitude } = data;
+
+    forecast(latitude, longitude, (error, data) => {
+      if (error) {
+        return res.send({
+          error: error,
+        });
+      }
+      console.log('call back data ', data);
+      // if (data === undefined) {
+      //   return res.send({
+      //     error: 'No forecast found something went wrong...',
+      //   });
+      // }
+      const { conditions, tempmax, tempmin, location } = data;
+      return res.send({
+        forcast: conditions,
+        location: location,
+        address: address,
+      });
+    });
+  });
 });
 app.get('/help/*', (req, res) => {
   res.render('404', {
