@@ -96,7 +96,12 @@ app.get('/weather', (req, res) => {
     console.log('data', data);
 
     const { latitude, longitude } = data;
-
+    if (latitude === undefined || longitude === undefined) {
+      return res.send({
+        error:
+          'No lat long found for the given address please provide valid address',
+      });
+    }
     forecast(latitude, longitude, (error, data) => {
       if (error) {
         return res.send({
