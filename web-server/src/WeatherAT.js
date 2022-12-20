@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
+const { allowedNodeEnvironmentFlags } = require('process');
 console.log(__dirname);
 console.log();
 const app = express();
@@ -70,7 +71,16 @@ app.get('/help', (req, res) => {
 app.get('/weather', (req, res) => {
   res.send({ forcase: 'cloudy', location: 'pune' });
 });
-
+app.get('/help/*', (req, res) => {
+  res.render('404', {
+    msg: 'Help page not found',
+  });
+});
+app.get('*', (req, res) => {
+  res.render('404', {
+    msg: 'Page not found....',
+  });
+});
 //Start server on port 3000 for listing request
 app.listen(3000, () => {
   console.log('server is up on port 3000');
