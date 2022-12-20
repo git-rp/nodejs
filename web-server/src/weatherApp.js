@@ -6,6 +6,30 @@ const app = express();
 const publicDir = path.join(__dirname, '../public');
 
 app.use(express.static(publicDir));
+app.set('view engine', 'hbs');
+
+app.get('', (req, res) => {
+  res.render('index', {
+    title: 'Weather App',
+    name: 'Bhuvi',
+  });
+});
+app.get('/about', (req, res) => {
+  res.render('about', {
+    title: 'About ME',
+    name: 'Bhuvi',
+  });
+});
+app.get('/help', (req, res) => {
+  res.render('help', {
+    title: 'Help...',
+    name: 'Bhuvi',
+  });
+});
+//app.use(express.static(publicDir));
+// app.get('', (req, res) => {
+//   res.render('index');
+// });
 
 // app.get('', (req, res) => {
 //   res.send('<h1>Hello Express...</h1>');
