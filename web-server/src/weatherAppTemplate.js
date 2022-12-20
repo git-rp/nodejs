@@ -5,10 +5,11 @@ console.log();
 const app = express();
 //Define path for express config
 const publicDir = path.join(__dirname, '../public');
+const viewPath = path.join(__dirname, '../templates');
 //Setup static content to serve
 app.use(express.static(publicDir));
 app.set('view engine', 'hbs');
-
+app.set('views', viewPath);
 //Setup handle bar views and location
 
 app.get('', (req, res) => {
@@ -25,7 +26,7 @@ app.get('/about', (req, res) => {
 });
 app.get('/help', (req, res) => {
   res.render('help', {
-    title: 'Help...',
+    title: 'Help Template...',
     name: 'Bhuvi',
   });
 });
