@@ -16,19 +16,27 @@ const forecast = require('./utils/forecast');
 
 console.log('starting');
 //Call back abstraction is taking out new code into the new reusable file
-// geocode('Boston', (error, data) => {
-//   console.log('Error', error);
-//   console.log('data', data);
-// });
+geocode('Boston', (error, data) => {
+  const { latitude, longitude, location } = data;
+  console.log('Error', error);
+  console.log(
+    'Location :: ' +
+      location +
+      ' :: Lat :: ' +
+      latitude +
+      ':: Long :: ' +
+      longitude
+  );
+});
 
-forecast(10.7128, -94.006, (error, data) => {
+forecast(10.7128, -94.006, (error, { conditions, tempmax, tempmin }) => {
   console.log('Error', error);
   console.log(
     'forcast for tomorrow is : conditions :' +
-      data.conditions +
+      conditions +
       ' Max temp : ' +
-      data.tempmax +
+      tempmax +
       ' Min temp : ' +
-      data.tempmin
+      tempmin
   );
 });

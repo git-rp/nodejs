@@ -16,20 +16,21 @@ readline.question('Input location for weather?', (location) => {
     }
     console.log('data', data);
 
-    const lat = data.latitude;
-    long = data.longitude;
+    const { latitude, longitude } = data;
 
-    forecast(lat, long, (error, data) => {
+    forecast(latitude, longitude, (error, data) => {
       if (error) {
         return console.log(error);
       }
+      console.log('call back data ', data);
+      const { conditions, tempmax, tempmin } = data;
       console.log(
         'forcast for tomorrow is : conditions :' +
-          data.conditions +
+          conditions +
           ' Max temp : ' +
-          data.tempmax +
+          tempmax +
           ' Min temp : ' +
-          data.tempmin
+          tempmin
       );
     });
   });

@@ -23,10 +23,14 @@ const forecast = (lat, long, callback) => {
       callback('Unable to find location try another search', undefined);
     } else {
       console.log(response.body.days[1].hours[0]);
+      const { conditions } = response.body.days[1].hours[0];
+      const { tempmax, tempmin } = response.body.days[1];
+      console.log('Destructured conditions', tempmax);
+
       callback(undefined, {
-        conditions: response.body.days[1].hours[0].conditions,
-        tempmax: response.body.days[1].tempmax,
-        tempmin: response.body.days[1].tempmin,
+        conditions: conditions,
+        tempmax: tempmax,
+        tempmin: tempmin,
       });
     }
   });
