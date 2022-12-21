@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/WeatherAT.js -e js,hbs"
   },
   "author": "",
   "license": "ISC",
@@ -13,5 +14,8 @@
     "hbs": "^4.2.0",
     "node-fetch": "^3.3.0",
     "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
