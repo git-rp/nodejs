@@ -22,3 +22,27 @@ me.save()
   .catch((error) => {
     console.log('Error---', error);
   });
+
+//---Task Model
+const Task = mongoose.model('Task', {
+  description: {
+    type: String,
+  },
+  completed: {
+    type: Boolean,
+  },
+});
+
+const myTask = new Task({
+  description: 'Homework',
+  completed: false,
+});
+
+myTask
+  .save()
+  .then(() => {
+    console.log(myTask);
+  })
+  .catch((error) => {
+    console.log('task error :', error);
+  });
