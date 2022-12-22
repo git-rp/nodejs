@@ -51,34 +51,36 @@ const me = new User({
   password: 'test@',
 });
 
-me.save()
-  .then(() => {
-    console.log(me);
-  })
-  .catch((error) => {
-    console.log('Error---', error);
-  });
-
-//---Task Model
-// const Task = mongoose.model('Task', {
-//   description: {
-//     type: String,
-//   },
-//   completed: {
-//     type: Boolean,
-//   },
-// });
-
-// const myTask = new Task({
-//   description: 'Homework',
-//   completed: false,
-// });
-
-// myTask
-//   .save()
+// me.save()
 //   .then(() => {
-//     console.log(myTask);
+//     console.log(me);
 //   })
 //   .catch((error) => {
-//     console.log('task error :', error);
+//     console.log('Error---', error);
 //   });
+
+//---Task Model
+const Task = mongoose.model('Task', {
+  description: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  completed: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const myTask = new Task({
+  description: 'Homework Zadu    ',
+});
+
+myTask
+  .save()
+  .then(() => {
+    console.log(myTask);
+  })
+  .catch((error) => {
+    console.log('task error :', error);
+  });
