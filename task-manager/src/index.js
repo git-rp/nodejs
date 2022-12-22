@@ -23,9 +23,29 @@ app.post('/users', (req, res) => {
   //    res.send('User created...');
 });
 app.get('/users', (req, res) => {
-  req.res.send('get users');
+  User.find({})
+    .then((users) => {
+      res.send(users);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 });
 
+app.get('/users/:id', (req, res) => {
+  const _id = req.params.id;
+  User.findById(_id)
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send('User not found...');
+      }
+      res.send(user);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+  console.log(req.params);
+});
 app.post('/tasks', (req, res) => {
   const task = new Task(req.body);
   task
@@ -36,6 +56,31 @@ app.post('/tasks', (req, res) => {
     .catch((error) => {
       res.status(400).send(error);
     });
+});
+
+app.get('/tasks', (req, res) => {
+  Task.find({})
+    .then((tasks) => {
+      res.send(tasks);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
+app.get('/tasks/:id', (req, res) => {
+  const _id = req.params.id;
+  Task.findById(_id)
+    .then((tasks) => {
+      if (!tasks) {
+        return res.status(404).send('Task not found...');
+      }
+      res.send(tasks);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+  console.log(req.params);
 });
 app.listen(port, () => {
   console.log('starting at port ', port);
