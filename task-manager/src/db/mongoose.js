@@ -30,11 +30,25 @@ const User = mongoose.model('User', {
       }
     },
   },
+  password: {
+    type: String,
+    required: true,
+    trim: true,
+    minLength: [6, 'Password min length is 6'],
+    validate(value) {
+      if (value.includes('password')) {
+        throw new Error(
+          'Password can not be password ,Please choose strong password...'
+        );
+      }
+    },
+  },
 });
 
 const me = new User({
   name: 'sham',
   email: 'testDger@gmail.com',
+  password: 'test@',
 });
 
 me.save()
