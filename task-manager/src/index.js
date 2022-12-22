@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 require('./db/mongoose');
 const User = require('./model/user');
+const Task = require('./model/task');
 
 const port = process.env.PORT || 3000;
 
@@ -23,6 +24,18 @@ app.post('/users', (req, res) => {
 });
 app.get('/users', (req, res) => {
   req.res.send('get users');
+});
+
+app.post('/tasks', (req, res) => {
+  const task = new Task(req.body);
+  task
+    .save()
+    .then(() => {
+      res.send(task);
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
 });
 app.listen(port, () => {
   console.log('starting at port ', port);
