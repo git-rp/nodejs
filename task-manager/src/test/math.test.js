@@ -1,4 +1,8 @@
-const { caculateTip } = require('../math');
+const {
+  caculateTip,
+  fahrenheitToCelsius,
+  celsiusToFahrenheit,
+} = require('../math');
 // test('hello', () => {
 //   console.log('');
 // });
@@ -17,4 +21,15 @@ test('should calculate total with tip', () => {
 test('should caculate total with default tip', () => {
   const total = caculateTip(10);
   expect(total).toBe(12);
+});
+
+test('should convert fahrenheitToCelsius', () => {
+  const temp = fahrenheitToCelsius(32);
+  expect(temp).toBe(0);
+  console.log('temp---', temp);
+});
+
+test('should convert celsius to fahrenheit', () => {
+  const temp = celsiusToFahrenheit(0);
+  expect(temp).toBe(32);
 });
